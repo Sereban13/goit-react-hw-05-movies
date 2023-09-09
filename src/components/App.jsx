@@ -26,7 +26,7 @@ export const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/products" element={<Products />} />
-        <Route path="/product/:id" element={<ProductDetails />} />
+        <Route path="/products/:id" element={<ProductDetails />} />
       </Routes>
     </Container>
   );
