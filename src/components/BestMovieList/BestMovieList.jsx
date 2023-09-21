@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Container, CardWrapper, ProductName } from './ProductList.Styled';
+import { Container, CardWrapper, ProductName } from './BestMovieList.Styled';
 
 export const ProductList = ({ products }) => {
   return (

@@ -1,4 +1,4 @@
-export const About = () => {
+export const Movie = () => {
   return (
     <main>
       <h1>About Us</h1>

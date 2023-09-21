@@ -7,24 +7,24 @@ export const Container = styled.div`
   padding: 0 16px;
 `;
 
-export const Header = styled.header`
-  display: flex;
+export const Head = styled.header`
+  /* display: flex; */
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  padding: 8px 0;
-  margin-bottom: 16px;
-  border-bottom: 1px solid black;
 
   > nav {
     display: flex;
+    border-bottom: 1px solid black;
+    padding: 8px 0;
+    margin-bottom: 16px;
   }
 `;
 
-export const Logo = styled.p`
-  font-weight: 700;
-  margin: 0;
-`;
+// export const Logo = styled.p`
+//   font-weight: 700;
+//   margin: 0;
+// `;
 
 export const Link = styled(NavLink)`
   padding: 8px 16px;
@@ -35,6 +35,6 @@ export const Link = styled(NavLink)`
 
   &.active {
     color: white;
-    background-color: orangered;
+    background-color: green;
   }
 `;
