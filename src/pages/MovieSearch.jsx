@@ -1,8 +1,17 @@
-export const MovieSearch = () => {
+export const MovieSearch = ({ submit }) => {
+  const handleSubmit = event => {
+    event.preventDefault();
+    const inputValue = event.target.elements.query.value;
+    submit(inputValue);
+    event.target.reset();
+  };
   return (
     <div>
-      <label htmlFor="movie">Write your faivorite movie </label>
-      <input id="movie" type="text" />
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="movie">Write your faivorite movie </label>
+        <input id="movie" type="text" name="name" />
+        <button type="submit">Find movie</button>
+      </form>
     </div>
   );
 };
