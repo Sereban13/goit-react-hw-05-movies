@@ -17,3 +17,25 @@ export const fetchMovie = async movieId => {
   );
   return responce.data;
 };
+
+export const fetchMoviCast = async movieId => {
+  try {
+    const responce = await axios.get(
+      `/movie/${movieId}/credits?language=en-US&api_key=${API_KEY}`
+    );
+    return responce.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const fetchMoviReviews = async movieId => {
+  try {
+    const responce = await axios.get(
+      `/movie/${movieId}/reviews?language=en-US&api_key=${API_KEY}`
+    );
+    return responce.data;
+  } catch (error) {
+    console.log(error);
+  }
+};

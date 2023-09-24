@@ -10,7 +10,7 @@ const Header = () => {
         <Head>
           <nav>
             <Link to={routes.HOME}>Home</Link>
-            <Link to={routes.MOVIES}>MovieSearch</Link>
+            <Link to={routes.MOVIES}>Movies</Link>
           </nav>
           <Suspense fallback={<div>Loading page...</div>}>
             <Outlet />

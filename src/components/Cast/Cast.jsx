@@ -1,16 +1,46 @@
+import Loader from 'components/Loader/Loader';
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { baseUrlImg, fetchMoviCast } from 'service/api-movie';
+
 const Cast = () => {
-  return (
-    <div>
-      <section>
-        <h2>Cast</h2>
-        <p>
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut, nesciunt
-          veniam. Excepturi itaque, voluptates fugiat perspiciatis quo saepe!
-          Iste eaque porro eveniet error dicta, modi ipsum hic quis minima
-          inventore.
-        </p>
-      </section>
-    </div>
+  const { id } = useParams();
+  const [credits, setCredits] = useState({});
+
+  useEffect(() => {
+    // setLoading(true);
+    if (!id) {
+      return;
+    }
+    const MovieCast = async () => {
+      try {
+        const fetchMovieCast = await fetchMoviCast(id);
+        setCredits(fetchMovieCast);
+      } catch (error) {
+        console.log(error);
+      }
+      // finally {
+      //   setLoading(false);
+      // }
+    };
+    MovieCast();
+  }, [id]);
+  console.log(credits.cast);
+  // console.log(credits);
+
+  return !credits ? (
+    <Loader />
+  ) : (
+    <>
+      {credits.cast.map(({ name, profile_path, character }) => (
+        <div>
+          <img src={`${baseUrlImg}/${profile_path}`} alt={name} width="150px" />
+
+          <h2>Name: {name}</h2>
+          <span>{character}</span>
+        </div>
+      ))}
+    </>
   );
 };
 

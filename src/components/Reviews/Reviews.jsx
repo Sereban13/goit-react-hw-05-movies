@@ -1,16 +1,45 @@
+import Loader from 'components/Loader/Loader';
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { fetchMoviReviews } from 'service/api-movie';
+
 const Reviews = () => {
-  return (
-    <div>
-      <section>
-        <h2>Reviews</h2>
-        <p>
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut, nesciunt
-          veniam. Excepturi itaque, voluptates fugiat perspiciatis quo saepe!
-          Iste eaque porro eveniet error dicta, modi ipsum hic quis minima
-          inventore.
-        </p>
-      </section>
-    </div>
+  const { id } = useParams();
+  const [reviews, setReviews] = useState({});
+
+  useEffect(() => {
+    // setLoading(true);
+    if (!id) {
+      return;
+    }
+    const MovieReviews = async () => {
+      try {
+        const fetchMovieReviews = await fetchMoviReviews(id);
+        setReviews(fetchMovieReviews);
+      } catch (error) {
+        console.log(error);
+      }
+      // finally {
+      //   setLoading(false);
+      // }
+    };
+    MovieReviews();
+  }, [id]);
+  console.log(reviews);
+  if (!reviews) {
+    return;
+  }
+  return !reviews ? (
+    <Loader />
+  ) : (
+    <>
+      {reviews.result.map(({ author, content }) => (
+        <div>
+          <h2>{author}</h2>
+          <p>{content}</p>
+        </div>
+      ))}
+    </>
   );
 };
 

@@ -27,8 +27,7 @@ const Home = () => {
   return (
     <div>
       <h2>Trend Movies</h2>
-      {/* {loading && <p>Loading ... </p>} */}
-      <MovieList movies={bestMovies} />
+      {!bestMovies ? <p>Loading...</p> : <MovieList movies={bestMovies} />}
     </div>
   );
 };

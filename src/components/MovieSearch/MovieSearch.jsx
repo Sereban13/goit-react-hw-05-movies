@@ -8,7 +8,7 @@ const MovieSearch = ({ submit }) => {
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="movie">Write your faivorite movie </label>
+        <label htmlFor="movie"> </label>
         <input id="movie" type="text" name="name" />
         <button type="submit">Find movie</button>
       </form>
