@@ -1,4 +1,4 @@
-export const MovieSearch = ({ submit }) => {
+const MovieSearch = ({ submit }) => {
   const handleSubmit = event => {
     event.preventDefault();
     const inputValue = event.target.elements.query.value;
@@ -15,3 +15,5 @@ export const MovieSearch = ({ submit }) => {
     </div>
   );
 };
+
+export default MovieSearch;

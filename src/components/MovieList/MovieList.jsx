@@ -1,18 +1,17 @@
 // import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-// import { routes } from 'routes';
+import { Link, useLocation } from 'react-router-dom';
+import { routes } from 'routes';
 // import { getBestMovies } from 'service/api-movie';
 // import { Container, CardWrapper, ProductName } from './MovieList.Styled';
 
-export const MovieList = ({ movies }) => {
-  // const location = useLocation();
-  // console.log(movies);
+const MovieList = ({ movies }) => {
+  const location = useLocation();
   return (
     <div>
       {movies.map(({ id, title }) => (
         <ul>
           <li key={id}>
-            <Link to={`/movies/${id}`}>
+            <Link to={`${routes.MOVIES}/${id}`} state={{ from: location }}>
               <h3>{title}</h3>
             </Link>
           </li>
@@ -21,3 +20,5 @@ export const MovieList = ({ movies }) => {
     </div>
   );
 };
+
+export default MovieList;

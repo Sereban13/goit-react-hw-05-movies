@@ -3,7 +3,7 @@ import { Outlet } from 'react-router-dom';
 import { routes } from 'routes';
 import { Container, Head, Link } from './HeaderStyled';
 
-export const Header = () => {
+const Header = () => {
   return (
     <div>
       <Container>
@@ -20,3 +20,5 @@ export const Header = () => {
     </div>
   );
 };
+
+export default Header;
