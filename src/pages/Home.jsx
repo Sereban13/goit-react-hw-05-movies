@@ -1,4 +1,5 @@
 // import Loader from 'components/Loader/Loader';
+import Loader from 'components/Loader/Loader';
 import MovieList from 'components/MovieList/MovieList';
 import { useEffect, useState } from 'react';
 import { getBestMovies } from 'service/api-movie';
@@ -13,10 +14,8 @@ const Home = () => {
       try {
         const response = await getBestMovies();
         setBestMovies([...response]);
-        // setLoading(false);
       } catch (error) {
         console.log(error);
-        // setLoading(false);
       } finally {
         // setLoading(false);
       }
@@ -27,7 +26,8 @@ const Home = () => {
   return (
     <div>
       <h2>Trend Movies</h2>
-      {!bestMovies ? <p>Loading...</p> : <MovieList movies={bestMovies} />}
+      {/* {loading && <Loader />} */}
+      {!bestMovies ? <Loader /> : <MovieList movies={bestMovies} />}
     </div>
   );
 };

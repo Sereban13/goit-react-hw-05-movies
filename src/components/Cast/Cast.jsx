@@ -5,42 +5,51 @@ import { baseUrlImg, fetchMoviCast } from 'service/api-movie';
 
 const Cast = () => {
   const { id } = useParams();
-  const [credits, setCredits] = useState({});
+  const [credits, setCredits] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    // setLoading(true);
     if (!id) {
       return;
     }
     const MovieCast = async () => {
+      setLoading(true);
       try {
-        const fetchMovieCast = await fetchMoviCast(id);
-        setCredits(fetchMovieCast);
+        const { cast } = await fetchMoviCast(id);
+        setCredits(cast);
       } catch (error) {
         console.log(error);
+      } finally {
+        setLoading(false);
       }
-      // finally {
-      //   setLoading(false);
-      // }
     };
     MovieCast();
   }, [id]);
-  console.log(credits.cast);
-  // console.log(credits);
+  console.log(credits);
 
-  return !credits ? (
-    <Loader />
-  ) : (
-    <>
-      {credits.cast.map(({ name, profile_path, character }) => (
-        <div>
-          <img src={`${baseUrlImg}/${profile_path}`} alt={name} width="150px" />
+  return (
+    <div>
+      {loading ? (
+        <Loader />
+      ) : (
+        <ul>
+          {credits.map(({ name, profile_path, character, id }) => (
+            <li key={id}>
+              <div>
+                <img
+                  src={`${baseUrlImg}/${profile_path}`}
+                  alt={name}
+                  width="150px"
+                />
 
-          <h2>Name: {name}</h2>
-          <span>{character}</span>
-        </div>
-      ))}
-    </>
+                <h2>Name: {name}</h2>
+                <span>{character}</span>
+              </div>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
   );
 };
 

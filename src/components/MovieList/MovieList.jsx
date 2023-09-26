@@ -8,15 +8,15 @@ const MovieList = ({ movies }) => {
   const location = useLocation();
   return (
     <div>
-      {movies.map(({ id, title }) => (
-        <ul>
+      <ul>
+        {movies.map(({ id, title }) => (
           <li key={id}>
             <Link to={`${routes.MOVIES}/${id}`} state={{ from: location }}>
               <h3>{title}</h3>
             </Link>
           </li>
-        </ul>
-      ))}
+        ))}
+      </ul>
     </div>
   );
 };

@@ -5,23 +5,23 @@ import { fetchMoviReviews } from 'service/api-movie';
 
 const Reviews = () => {
   const { id } = useParams();
-  const [reviews, setReviews] = useState({});
+  const [reviews, setReviews] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    // setLoading(true);
+    setLoading(true);
     if (!id) {
       return;
     }
     const MovieReviews = async () => {
       try {
-        const fetchMovieReviews = await fetchMoviReviews(id);
-        setReviews(fetchMovieReviews);
+        const { results } = await fetchMoviReviews(id);
+        setReviews(results);
       } catch (error) {
         console.log(error);
+      } finally {
+        setLoading(false);
       }
-      // finally {
-      //   setLoading(false);
-      // }
     };
     MovieReviews();
   }, [id]);
@@ -29,16 +29,26 @@ const Reviews = () => {
   if (!reviews) {
     return;
   }
-  return !reviews ? (
-    <Loader />
-  ) : (
+  return (
     <>
-      {reviews.result.map(({ author, content }) => (
+      {loading && <Loader />}
+      {!reviews ? (
+        <p>We do not find any reviews</p>
+      ) : (
         <div>
-          <h2>{author}</h2>
-          <p>{content}</p>
+          <ul>
+            {reviews.map(
+              ({ author, author_details: { name }, content, id }) => (
+                <li key={id}>
+                  <h2>{!name ? author : name}</h2>
+                  <h3>Content</h3>
+                  <p>{content}</p>
+                </li>
+              )
+            )}
+          </ul>
         </div>
-      ))}
+      )}
     </>
   );
 };
