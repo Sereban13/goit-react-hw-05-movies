@@ -6,21 +6,22 @@ import { baseUrlImg, fetchMoviCast } from 'service/api-movie';
 const Cast = () => {
   const { id } = useParams();
   const [credits, setCredits] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
 
   useEffect(() => {
     if (!id) {
       return;
     }
     const MovieCast = async () => {
-      setLoading(true);
+      setIsLoading(true);
       try {
         const { cast } = await fetchMoviCast(id);
         setCredits(cast);
       } catch (error) {
-        console.log(error);
+        setError('Whoops, something went wrong');
       } finally {
-        setLoading(false);
+        setIsLoading(false);
       }
     };
     MovieCast();
@@ -29,7 +30,34 @@ const Cast = () => {
 
   return (
     <div>
-      {loading ? (
+      {isLoading && <Loader />}
+
+      {error ? (
+        <p>Whoops, something went wrong</p>
+      ) : (
+        <ul>
+          {credits.map(({ name, profile_path, character, id }) => (
+            <li key={id}>
+              <div>
+                <img
+                  src={
+                    profile_path
+                      ? `${baseUrlImg}/${profile_path}`
+                      : 'https://upload.wikimedia.org/wikipedia/commons/6/67/User_Avatar.png'
+                  }
+                  alt={name}
+                  // width="512px"
+                />
+
+                <h2>Name: {name}</h2>
+                <span>{character}</span>
+              </div>
+            </li>
+          ))}
+        </ul>
+      )}
+
+      {/* {isLoading ? (
         <Loader />
       ) : (
         <ul>
@@ -48,7 +76,7 @@ const Cast = () => {
             </li>
           ))}
         </ul>
-      )}
+      )} */}
     </div>
   );
 };

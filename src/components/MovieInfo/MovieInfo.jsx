@@ -1,14 +1,17 @@
-// import { GoBackBtn } from 'components/GoBackBtn.jsx/GoBackBtn';
 import Loader from 'components/Loader/Loader';
-// import { Suspense } from 'react';
-// import { Link, Outlet, useLocation } from 'react-router-dom';
-// import { routes } from 'routes';
 import { baseUrlImg } from 'service/api-movie';
 
 export const MovieInfo = ({ movie }) => {
   return (
     <div>
-      <img src={`${baseUrlImg}/${movie.backdrop_path}`} alt={movie.title} />
+      {movie.backdrop_path ? (
+        <img src={`${baseUrlImg}/${movie.backdrop_path}`} alt={movie.title} />
+      ) : (
+        <div>
+          <h3>We did not get any poster of this film</h3>
+        </div>
+      )}
+
       <h2> {movie.title}</h2>
 
       <h3>Overview:</h3>

@@ -10,12 +10,14 @@ import Loader from 'components/Loader/Loader';
 const MovieDetails = () => {
   const { id } = useParams();
   const [findedMovie, setFindedMovie] = useState({});
-  const [loading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
+
   const location = useLocation();
   const backToPreviousLocation = location?.state?.from ?? '/';
 
   useEffect(() => {
-    setLoading(true);
+    setIsLoading(true);
     if (!id) {
       return;
     }
@@ -24,22 +26,29 @@ const MovieDetails = () => {
         const fetchMovieById = await fetchMovie(id);
         setFindedMovie(fetchMovieById);
       } catch (error) {
-        console.log(error);
+        setError('Whoops, something went wrong');
       } finally {
-        setLoading(false);
+        setIsLoading(false);
       }
     };
     findMovie();
   }, [id]);
 
   if (!findedMovie) {
-    return <p>Loading ...</p>;
+    return;
   }
   return (
     <>
-      {loading && <Loader />}
-      <MovieInfo movie={findedMovie} />
+      {isLoading && <Loader />}
+
       <GoBackBtn path={backToPreviousLocation}>Back Button</GoBackBtn>
+
+      {error ? (
+        <p>Whoops, something went wrong</p>
+      ) : (
+        <MovieInfo movie={findedMovie} />
+      )}
+
       <ul>
         <li>
           <Link to={routes.CAST}>Cast</Link>

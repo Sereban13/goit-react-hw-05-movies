@@ -1,8 +1,6 @@
 // import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { routes } from 'routes';
-// import { getBestMovies } from 'service/api-movie';
-// import { Container, CardWrapper, ProductName } from './MovieList.Styled';
 
 const MovieList = ({ movies }) => {
   const location = useLocation();

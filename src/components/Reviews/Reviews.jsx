@@ -6,10 +6,11 @@ import { fetchMoviReviews } from 'service/api-movie';
 const Reviews = () => {
   const { id } = useParams();
   const [reviews, setReviews] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
 
   useEffect(() => {
-    setLoading(true);
+    setIsLoading(true);
     if (!id) {
       return;
     }
@@ -18,9 +19,9 @@ const Reviews = () => {
         const { results } = await fetchMoviReviews(id);
         setReviews(results);
       } catch (error) {
-        console.log(error);
+        setError('Whoops, something went wrong');
       } finally {
-        setLoading(false);
+        setIsLoading(false);
       }
     };
     MovieReviews();
@@ -31,9 +32,11 @@ const Reviews = () => {
   }
   return (
     <>
-      {loading && <Loader />}
-      {!reviews ? (
-        <p>We do not find any reviews</p>
+      {isLoading && <Loader />}
+      {error && <p>Whoops, something went wrong</p>}
+
+      {reviews.length === 0 ? (
+        <p>We did not find any information</p>
       ) : (
         <div>
           <ul>

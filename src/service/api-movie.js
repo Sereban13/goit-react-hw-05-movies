@@ -11,6 +11,21 @@ export const getBestMovies = async () => {
   return data.results;
 };
 
+// export const fetchMovieByQuery = async (searchQuery, page) => {
+//   const query = searchQuery.slice(14, searchQuery.length);
+//   const responce = await axios.get(
+//     `/search/movie?query=${query}&include_adult=false&language=en-US&page=${page}&api_key=${API_KEY}`
+//   );
+//   return responce.data;
+// };
+export const fetchMovieByQuery = async searchQuery => {
+  // const query = searchQuery.slice(14, searchQuery.length);
+  const responce = await axios.get(
+    `/search/movie?query=${searchQuery}&include_adult=false&language=en-US&api_key=${API_KEY}`
+  );
+  return responce.data;
+};
+
 export const fetchMovie = async movieId => {
   const responce = await axios.get(
     `/movie/${movieId}?language=en-US&api_key=${API_KEY}`
