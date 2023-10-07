@@ -19,7 +19,6 @@ export const getBestMovies = async () => {
 //   return responce.data;
 // };
 export const fetchMovieByQuery = async searchQuery => {
-  // const query = searchQuery.slice(14, searchQuery.length);
   const responce = await axios.get(
     `/search/movie?query=${searchQuery}&include_adult=false&language=en-US&api_key=${API_KEY}`
   );

@@ -26,10 +26,7 @@ const Reviews = () => {
     };
     MovieReviews();
   }, [id]);
-  console.log(reviews);
-  if (!reviews) {
-    return;
-  }
+
   return (
     <>
       {isLoading && <Loader />}

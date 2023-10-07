@@ -1,4 +1,4 @@
-import { Suspense, useEffect, useState } from 'react';
+import { Suspense, useEffect, useRef, useState } from 'react';
 import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
 //
 import { fetchMovie } from 'service/api-movie';
@@ -14,7 +14,7 @@ const MovieDetails = () => {
   const [error, setError] = useState('');
 
   const location = useLocation();
-  const backToPreviousLocation = location?.state?.from ?? '/';
+  const backLinkHref = useRef(location?.state?.from ?? `${routes.MOVIES}`);
 
   useEffect(() => {
     setIsLoading(true);
@@ -41,7 +41,7 @@ const MovieDetails = () => {
     <>
       {isLoading && <Loader />}
 
-      <GoBackBtn path={backToPreviousLocation}>Back Button</GoBackBtn>
+      <GoBackBtn to={backLinkHref.current}>Go Back</GoBackBtn>
 
       {error ? (
         <p>Whoops, something went wrong</p>
@@ -57,7 +57,7 @@ const MovieDetails = () => {
           <Link to={routes.REVIEWS}>Reviews</Link>
         </li>
       </ul>
-      <Suspense fallback={<div>Loading subpage...</div>}>
+      <Suspense fallback={<Loader />}>
         <Outlet />
       </Suspense>
     </>

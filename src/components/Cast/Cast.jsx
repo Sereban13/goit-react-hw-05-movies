@@ -26,14 +26,14 @@ const Cast = () => {
     };
     MovieCast();
   }, [id]);
-  console.log(credits);
 
   return (
     <div>
       {isLoading && <Loader />}
+      {error && <p>Whoops, something went wrong</p>}
 
-      {error ? (
-        <p>Whoops, something went wrong</p>
+      {credits.length === 0 ? (
+        <p>We did not find any information</p>
       ) : (
         <ul>
           {credits.map(({ name, profile_path, character, id }) => (
@@ -46,7 +46,7 @@ const Cast = () => {
                       : 'https://upload.wikimedia.org/wikipedia/commons/6/67/User_Avatar.png'
                   }
                   alt={name}
-                  // width="512px"
+                  width="400px"
                 />
 
                 <h2>Name: {name}</h2>
@@ -56,27 +56,6 @@ const Cast = () => {
           ))}
         </ul>
       )}
-
-      {/* {isLoading ? (
-        <Loader />
-      ) : (
-        <ul>
-          {credits.map(({ name, profile_path, character, id }) => (
-            <li key={id}>
-              <div>
-                <img
-                  src={`${baseUrlImg}/${profile_path}`}
-                  alt={name}
-                  width="150px"
-                />
-
-                <h2>Name: {name}</h2>
-                <span>{character}</span>
-              </div>
-            </li>
-          ))}
-        </ul>
-      )} */}
     </div>
   );
 };
