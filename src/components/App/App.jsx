@@ -23,7 +23,7 @@ export const App = () => {
             <Route path={routes.CAST} element={<Cast />} />
             <Route path={routes.REVIEWS} element={<Reviews />} />
           </Route>
-          <Route path="*" element={<h1>Page is not found....</h1>} />
+          <Route path="*" element={<Home />} />
         </Route>
       </Routes>
     </div>
