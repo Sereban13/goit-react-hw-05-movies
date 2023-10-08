@@ -1,9 +1,9 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { routes } from 'routes';
 import { lazy } from 'react';
 //
 import Header from 'components/Header/Header';
-import NotFoundPage from 'pages/NotFoundPage';
+// import NotFoundPage from 'pages/NotFoundPage';
 //
 const Home = lazy(() => import('pages/Home'));
 const Movies = lazy(() => import('pages/Movies'));
@@ -26,7 +26,7 @@ export const App = () => {
             <Route path={routes.REVIEWS} element={<Reviews />} />
           </Route>
 
-          <Route path="*" element={<NotFoundPage />} />
+          <Route path="*" element={<Navigate to={routes.HOME} />} />
         </Route>
       </Routes>
     </div>
