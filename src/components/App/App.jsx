@@ -1,8 +1,9 @@
 import { Routes, Route } from 'react-router-dom';
 import { routes } from 'routes';
 import { lazy } from 'react';
+//
 import Header from 'components/Header/Header';
-import { NotFoundPage } from 'pages/NotFoundPage';
+import NotFoundPage from 'pages/NotFoundPage';
 //
 const Home = lazy(() => import('pages/Home'));
 const Movies = lazy(() => import('pages/Movies'));
